@@ -1,0 +1,50 @@
+[
+ {
+  "directory": "/home/runner/treesittertest",
+  "arguments": [
+   "cc",
+   "-o",
+   "obj/main.o",
+   "-c",
+   "src/main.c",
+   "-Wall",
+   "-g",
+   "-ggdb",
+   "-Iinclude",
+   "-Llib"
+  ],
+  "file": "src/main.c"
+ },
+ {
+  "directory": "/home/runner/treesittertest",
+  "arguments": [
+   "cc",
+   "-o",
+   "obj/util.o",
+   "-c",
+   "src/util.c",
+   "-Wall",
+   "-g",
+   "-ggdb",
+   "-Iinclude",
+   "-Llib"
+  ],
+  "file": "src/util.c"
+ },
+ {
+  "directory": "/home/runner/treesittertest",
+  "arguments": [
+   "cc",
+   "-o",
+   "obj/c_parser.o",
+   "-c",
+   "src/c_parser.c",
+   "-Wall",
+   "-g",
+   "-ggdb",
+   "-Iinclude",
+   "-Llib"
+  ],
+  "file": "src/c_parser.c"
+ }
+]
