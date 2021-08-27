@@ -7,4 +7,4 @@ obj/%.o: src/%.c
 	$(CC) -o $@ -c $< $(CFLAGS)
 
 main: $(OBJS) $(DEPS)
-	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
+	$(CC) -o $@ $^ $(CFLAGS) $(LFLAGS)
