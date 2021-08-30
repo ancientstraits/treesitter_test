@@ -45,30 +45,32 @@ int main(int argc, char* argv[]) {
 
 	TSQueryMatch qmatch;
 
-	while(1) {
-		if (!ts_query_cursor_next_match(qcursor, &qmatch))
-			break;
+	printQueryMatchAsJson(qcursor, &qmatch);
+
+	// while(1) {
+	// 	if (!ts_query_cursor_next_match(qcursor, &qmatch))
+	// 		break;
 	
-		printf("id = %d\n", qmatch.id);
-		printf("pattern_index = %d\n",
-			qmatch.pattern_index);
-		printf("capture_count = %d\n",
-			qmatch.capture_count);
+	// 	printf("id = %d\n", qmatch.id);
+	// 	printf("pattern_index = %d\n",
+	// 		qmatch.pattern_index);
+	// 	printf("capture_count = %d\n",
+	// 		qmatch.capture_count);
 		
-		if (qmatch.captures == NULL) {
-			fprintf(stderr, "No 'captures' :(\n");
-			printf("\n\n");
-			continue;
-		}
-		printf("Capture index: %d\n",
-		qmatch.captures->index);
+	// 	if (qmatch.captures == NULL) {
+	// 		fprintf(stderr, "No 'captures' :(\n");
+	// 		printf("\n\n");
+	// 		continue;
+	// 	}
+	// 	printf("Capture index: %d\n",
+	// 	qmatch.captures->index);
 
-		char* s = ts_node_string(qmatch.captures->node);
-		printf("%s\n", s);
-		free(s);
+	// 	char* s = ts_node_string(qmatch.captures->node);
+	// 	printf("%s\n", s);
+	// 	free(s);
 
-		printf("\n\n");
-	}
+	// 	printf("\n\n");
+	// }
 
 	ts_query_cursor_delete(qcursor);
 	ts_query_delete(query);

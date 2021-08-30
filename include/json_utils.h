@@ -1,7 +1,7 @@
 #ifndef JSON_UTILS_H
 #define JSON_UTILS_H
 
-#include <tree-sitter/api.h>
+#include <tree_sitter/api.h>
 
 void printQueryMatchAsJson(TSQueryCursor* qcursor,
 TSQueryMatch* qmatch);
