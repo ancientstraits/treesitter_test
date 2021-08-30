@@ -4,6 +4,7 @@
 
 #include "c_parser.h"
 #include "util.h"
+#include "json_utils.h"
 
 int main(int argc, char* argv[]) {
 	
@@ -22,13 +23,55 @@ int main(int argc, char* argv[]) {
 	free(source_code);
 
 	TSNode root = ts_tree_root_node(tree);
-	
-	
 
 	char* str = ts_node_string(root);
-	printf("%s\n", str);
+	printf("%s\n\n", str);
 	free(str);
 	
+	char* query_source = readFile("queries/one.scm");
+	uint32_t qoffset;	
+	TSQueryError qerror;
+	TSQuery* query = ts_query_new(
+		tree_sitter_c(),
+		query_source,
+		strlen(query_source),
+		&qoffset,
+		&qerror
+	);
+	free(query_source);
+
+	TSQueryCursor* qcursor = ts_query_cursor_new();
+	ts_query_cursor_exec(qcursor, query, root);
+
+	TSQueryMatch qmatch;
+
+	while(1) {
+		if (!ts_query_cursor_next_match(qcursor, &qmatch))
+			break;
+	
+		printf("id = %d\n", qmatch.id);
+		printf("pattern_index = %d\n",
+			qmatch.pattern_index);
+		printf("capture_count = %d\n",
+			qmatch.capture_count);
+		
+		if (qmatch.captures == NULL) {
+			fprintf(stderr, "No 'captures' :(\n");
+			printf("\n\n");
+			continue;
+		}
+		printf("Capture index: %d\n",
+		qmatch.captures->index);
+
+		char* s = ts_node_string(qmatch.captures->node);
+		printf("%s\n", s);
+		free(s);
+
+		printf("\n\n");
+	}
+
+	ts_query_cursor_delete(qcursor);
+	ts_query_delete(query);
 	ts_tree_delete(tree);
 	ts_parser_delete(parser);
 	return 0;

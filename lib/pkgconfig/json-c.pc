@@ -1,0 +1,12 @@
+prefix=/home/runner/treesittertest
+exec_prefix=/home/runner/treesittertest
+libdir=/home/runner/treesittertest/lib
+includedir=/home/runner/treesittertest/include
+
+Name: json-c
+Description: A JSON implementation in C
+Version: 0.15.99
+Requires:
+Libs.private: 
+Libs: -L${libdir} -ljson-c
+Cflags: -I${includedir} -I${includedir}/json-c

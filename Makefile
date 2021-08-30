@@ -1,5 +1,5 @@
 CFLAGS = -Wall -g -ggdb -Iinclude -Llib
-LFLAGS = -ltree-sitter
+LFLAGS = -ltree-sitter -ljson-c
 OBJS = $(patsubst src/%.c,obj/%.o,$(wildcard src/*.c))
 DEPS = $(wildcard include/*.h)
 
