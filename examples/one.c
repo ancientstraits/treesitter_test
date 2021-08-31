@@ -1,5 +1,7 @@
+#include <stdio.h>
+
 int main() {
-	char str[] = "Hello World!";
-	int x = 10;
-	return 0;
+	int x;
+	int y;
+	printf("Hello World!");
 }

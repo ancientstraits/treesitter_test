@@ -55,45 +55,38 @@ int main(int argc, char* argv[]) {
 	ts_query_cursor_exec(qcursor, query, root);
 
 	TSQueryMatch qmatch;
+
+#define DBG_HL
+#ifdef DBG_HL
+	while (ts_query_cursor_next_match(qcursor, &qmatch)) {
+		printf("Query %d:\n", qmatch.id);
+		printf("\tPattern Index: %d\n", qmatch.pattern_index);
+		char* str = ts_node_string(qmatch.captures->node);
+		printf("\tString: %s\n", str);
+		printf("\tCapture count: %d\n", qmatch.capture_count);
+		free(str);
+		unsigned int x;
+		printf("\tCapture name: %s\n", ts_query_capture_name_for_id(query, qmatch.id, &x));
+		printf("\tCapture length: %d\n", x);
+		printf("\n");
+	}
+#else
 	ts_query_cursor_next_match(qcursor, &qmatch);
 	unsigned long* range = getRange(&qmatch);
 	
 	for (unsigned long i = 0; source_code[i] != '\0'; i++) {
-		if (i >= range[0] - 1 && i <= range[1] - 1) {
-			cprintf((int)syntax(&qmatch), "%c", source_code[i]);
+		if (i >= range[0] && i <= range[1] - 1) {
+			cprintf((int)type_map[qmatch.pattern_index], "%c", source_code[i]);
+
 			if (i == range[1] - 1) {
 				if (!ts_query_cursor_next_match(qcursor, &qmatch)) continue;
+				
 				range = getRange(&qmatch);
 			}
 		} else
 			cprintf(COLOR_WHITE, "%c", source_code[i]);
 	}
-
-
-	// while(1) {
-	// 	if (!ts_query_cursor_next_match(qcursor, &qmatch))
-	// 		break;
-	
-	// 	printf("id = %d\n", qmatch.id);
-	// 	printf("pattern_index = %d\n",
-	// 		qmatch.pattern_index);
-	// 	printf("capture_count = %d\n",
-	// 		qmatch.capture_count);
-		
-	// 	if (qmatch.captures == NULL) {
-	// 		fprintf(stderr, "No 'captures' :(\n");
-	// 		printf("\n\n");
-	// 		continue;
-	// 	}
-	// 	printf("Capture index: %d\n",
-	// 	qmatch.captures->index);
-
-	// 	char* s = ts_node_string(qmatch.captures->node);
-	// 	printf("%s\n", s);
-	// 	free(s);
-
-	// 	printf("\n\n");
-	// }
+#endif
 
 	free(source_code);
 	ts_query_cursor_delete(qcursor);
