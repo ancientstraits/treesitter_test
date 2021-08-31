@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <tree_sitter/api.h>
+#include <assert.h>
 
 #include "c_parser.h"
 #include "util.h"
@@ -11,6 +12,10 @@ static unsigned long* getRange(TSQueryMatch* qmatch) {
 		ts_node_start_byte(qmatch->captures->node),
 		ts_node_end_byte(qmatch->captures->node),
 	};
+}
+
+static unsigned long syntax(TSQueryMatch* qmatch) {
+	return qmatch->pattern_index + 33;
 }
 
 int main(int argc, char* argv[]) {
@@ -51,11 +56,17 @@ int main(int argc, char* argv[]) {
 
 	TSQueryMatch qmatch;
 	ts_query_cursor_next_match(qcursor, &qmatch);
-
 	unsigned long* range = getRange(&qmatch);
-
-	for (int i = 0; source_code[i] != '\0'; i++) {
-		cprintf(COLOR_CYAN, "%c", source_code[i]);
+	
+	for (unsigned long i = 0; source_code[i] != '\0'; i++) {
+		if (i >= range[0] - 1 && i <= range[1] - 1) {
+			cprintf((int)syntax(&qmatch), "%c", source_code[i]);
+			if (i == range[1] - 1) {
+				if (!ts_query_cursor_next_match(qcursor, &qmatch)) continue;
+				range = getRange(&qmatch);
+			}
+		} else
+			cprintf(COLOR_WHITE, "%c", source_code[i]);
 	}
 
 
