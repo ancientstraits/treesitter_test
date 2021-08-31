@@ -6,6 +6,13 @@
 #include "util.h"
 #include "json_utils.h"
 
+static unsigned long* getRange(TSQueryMatch* qmatch) {
+	return (unsigned long[]) {
+		ts_node_start_byte(qmatch->captures->node),
+		ts_node_end_byte(qmatch->captures->node),
+	};
+}
+
 int main(int argc, char* argv[]) {
 	
 	TSParser* parser = ts_parser_new();
@@ -20,7 +27,6 @@ int main(int argc, char* argv[]) {
 		source_code,
 		strlen(source_code)
 	);
-	free(source_code);
 
 	TSNode root = ts_tree_root_node(tree);
 
@@ -44,8 +50,14 @@ int main(int argc, char* argv[]) {
 	ts_query_cursor_exec(qcursor, query, root);
 
 	TSQueryMatch qmatch;
+	ts_query_cursor_next_match(qcursor, &qmatch);
 
-	printQueryMatchAsJson(qcursor, &qmatch);
+	unsigned long* range = getRange(&qmatch);
+
+	for (int i = 0; source_code[i] != '\0'; i++) {
+		cprintf(COLOR_CYAN, "%c", source_code[i]);
+	}
+
 
 	// while(1) {
 	// 	if (!ts_query_cursor_next_match(qcursor, &qmatch))
@@ -72,6 +84,7 @@ int main(int argc, char* argv[]) {
 	// 	printf("\n\n");
 	// }
 
+	free(source_code);
 	ts_query_cursor_delete(qcursor);
 	ts_query_delete(query);
 	ts_tree_delete(tree);
