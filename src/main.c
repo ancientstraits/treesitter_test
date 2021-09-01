@@ -14,10 +14,6 @@ static unsigned long* getRange(TSQueryMatch* qmatch) {
 	};
 }
 
-static unsigned long syntax(TSQueryMatch* qmatch) {
-	return qmatch->pattern_index + 33;
-}
-
 int main(int argc, char* argv[]) {
 	
 	TSParser* parser = ts_parser_new();
@@ -35,10 +31,6 @@ int main(int argc, char* argv[]) {
 
 	TSNode root = ts_tree_root_node(tree);
 
-	char* str = ts_node_string(root);
-	printf("%s\n\n", str);
-	free(str);
-	
 	char* query_source = readFile("queries/one.scm");
 	uint32_t qoffset;	
 	TSQueryError qerror;
@@ -56,7 +48,7 @@ int main(int argc, char* argv[]) {
 
 	TSQueryMatch qmatch;
 
-#define DBG_HL
+// #define DBG_HL
 #ifdef DBG_HL
 	while (ts_query_cursor_next_match(qcursor, &qmatch)) {
 		printf("Query %d:\n", qmatch.id);
@@ -66,7 +58,7 @@ int main(int argc, char* argv[]) {
 		printf("\tCapture count: %d\n", qmatch.capture_count);
 		free(str);
 		unsigned int x;
-		printf("\tCapture name: %s\n", ts_query_capture_name_for_id(query, qmatch.id, &x));
+		printf("\tCapture name: %s\n", ts_query_capture_name_for_id(query, qmatch.captures->index, &x));
 		printf("\tCapture length: %d\n", x);
 		printf("\n");
 	}
@@ -76,7 +68,7 @@ int main(int argc, char* argv[]) {
 	
 	for (unsigned long i = 0; source_code[i] != '\0'; i++) {
 		if (i >= range[0] && i <= range[1] - 1) {
-			cprintf((int)type_map[qmatch.pattern_index], "%c", source_code[i]);
+			cprintf((int)type_map[qmatch.captures->index], "%c", source_code[i]);
 
 			if (i == range[1] - 1) {
 				if (!ts_query_cursor_next_match(qcursor, &qmatch)) continue;

@@ -15,14 +15,19 @@ enum Colors {
     COLOR_WHITE,
 };
 
-#define cprintf(color, format, ...) printf("\033[0;%dm" format "\033[0m", color, __VA_ARGS__)
+#define cprintf(color, format, ...) \
+    printf("\033[0;%dm" format "\033[0m", color, __VA_ARGS__)
 
 enum Types {
-    TYPE_INCLUDE = 28,
-    
+    TYPE_NUMBER = 0,
+    TYPE_STRING,
+    TYPE_TYPE,
 };
 
 unsigned long type_map[] = {
+    [TYPE_NUMBER]   = COLOR_BLUE,
+    [TYPE_STRING]   = COLOR_GREEN,
+    [TYPE_TYPE]     = COLOR_YELLOW,
 };
 
 #endif // !UTIL_H
