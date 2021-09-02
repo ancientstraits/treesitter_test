@@ -1,4 +1,4 @@
-prefix=/home/runner/treesittertest
+prefix=../
 libdir=${prefix}/lib
 includedir=${prefix}/include
 

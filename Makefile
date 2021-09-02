@@ -1,10 +1,10 @@
 CFLAGS = -Wall -g -ggdb -Iinclude -Llib
-LFLAGS = -ltree-sitter -ljson-c
+LFLAGS = -ltree-sitter
 OBJS = $(patsubst src/%.c,obj/%.o,$(wildcard src/*.c))
 DEPS = $(wildcard include/*.h)
 
-obj/%.o: src/%.c $(DEPS)
+obj/%.o: src/%.c
 	$(CC) -o $@ -c $< $(CFLAGS)
 
-main: $(OBJS)
+main: $(OBJS) $(DEPS)
 	$(CC) -o $@ $^ $(CFLAGS) $(LFLAGS)

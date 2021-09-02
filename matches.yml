@@ -1,0 +1,199 @@
+---
+captures: 13
+
+match_00:
+  pattern_index: 28
+  captures:
+    count:  1
+    index:  0
+    string: "keyword"
+
+match_01:
+  pattern_index: 49
+  captures:
+    count:  1
+    index:  3
+    string: "string"
+
+match_02:
+  pattern_index: 60
+  captures:
+    count:  1
+    index:  10
+    string: "type"
+
+match_03:
+  pattern_index: 55
+  captures:
+    count:  1
+    index:  6
+    string: "function"
+
+match_04:
+  pattern_index: 62
+  captures:
+    count:  1
+    index:  4
+    string: "constant"
+
+match_05:
+  pattern_index: 63
+  captures:
+    count:  1
+    index:  11
+    string: "variable"
+
+match_06:
+  pattern_index: 60
+  captures:
+    count:  1
+    index:  10
+    string: "type"
+
+match_07:
+  pattern_index: 62
+  captures:
+    count:  1
+    index:  4
+    string: "constant"
+
+match_08:
+  pattern_index: 63
+  captures:
+    count:  1
+    index:  11
+    string: "variable"
+
+match_09:
+  pattern_index: 34
+  captures:
+    count:  1
+    index:  1
+    string: "operator"
+
+match_10:
+  pattern_index: 51
+  captures:
+    count:  1
+    index:  5
+    string: "number"
+
+match_11:
+  pattern_index: 47
+  captures:
+    count:  1
+    index:  2
+    string: "delimiter"
+
+match_12:
+  pattern_index: 60
+  captures:
+    count:  1
+    index:  10
+    string: "type"
+
+match_13:
+  pattern_index: 62
+  captures:
+    count:  1
+    index:  4
+    string: "constant"
+
+match_14:
+  pattern_index: 63
+  captures:
+    count:  1
+    index:  11
+    string: "variable"
+
+match_15:
+  pattern_index: 34
+  captures:
+    count:  1
+    index:  1
+    string: "operator"
+
+match_16:
+  pattern_index: 51
+  captures:
+    count:  1
+    index:  5
+    string: "number"
+
+match_17:
+  pattern_index: 47
+  captures:
+    count:  1
+    index:  2
+    string: "delimiter"
+
+match_18:
+  pattern_index: 53
+  captures:
+    count:  1
+    index:  6
+    string: "function"
+
+match_19:
+  pattern_index: 62
+  captures:
+    count:  1
+    index:  4
+    string: "constant"
+
+match_20:
+  pattern_index: 63
+  captures:
+    count:  1
+    index:  11
+    string: "variable"
+
+match_21:
+  pattern_index: 48
+  captures:
+    count:  1
+    index:  3
+    string: "string"
+
+match_22:
+  pattern_index: 62
+  captures:
+    count:  1
+    index:  4
+    string: "constant"
+
+match_23:
+  pattern_index: 63
+  captures:
+    count:  1
+    index:  11
+    string: "variable"
+
+match_24:
+  pattern_index: 39
+  captures:
+    count:  1
+    index:  1
+    string: "operator"
+
+match_25:
+  pattern_index: 62
+  captures:
+    count:  1
+    index:  4
+    string: "constant"
+
+match_26:
+  pattern_index: 63
+  captures:
+    count:  1
+    index:  11
+    string: "variable"
+
+match_27:
+  pattern_index: 47
+  captures:
+    count:  1
+    index:  2
+    string: "delimiter"
+
