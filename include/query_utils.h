@@ -16,6 +16,7 @@ QueryUtils query_utils_create(const char* query_path,
                                 TSNode root);
 void query_utils_destroy(QueryUtils* q);
 void query_utils_debug(QueryUtils* q);
+void query_utils_print_captures(QueryUtils* q);
 void query_utils_highlight(QueryUtils* q, const char* file_name);
 
 #endif

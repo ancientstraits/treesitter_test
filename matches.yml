@@ -1,6 +1,5 @@
 ---
 captures: 13
-
 match_00:
   pattern_index: 28
   captures:
@@ -8,6 +7,9 @@ match_00:
     index:  0
     string: "keyword"
 
+    node:
+      start_byte: 0
+      end_byte:   8
 match_01:
   pattern_index: 49
   captures:
@@ -15,6 +17,9 @@ match_01:
     index:  3
     string: "string"
 
+    node:
+      start_byte: 9
+      end_byte:   18
 match_02:
   pattern_index: 60
   captures:
@@ -22,6 +27,9 @@ match_02:
     index:  10
     string: "type"
 
+    node:
+      start_byte: 20
+      end_byte:   23
 match_03:
   pattern_index: 55
   captures:
@@ -29,6 +37,9 @@ match_03:
     index:  6
     string: "function"
 
+    node:
+      start_byte: 24
+      end_byte:   28
 match_04:
   pattern_index: 62
   captures:
@@ -36,6 +47,9 @@ match_04:
     index:  4
     string: "constant"
 
+    node:
+      start_byte: 24
+      end_byte:   28
 match_05:
   pattern_index: 63
   captures:
@@ -43,6 +57,9 @@ match_05:
     index:  11
     string: "variable"
 
+    node:
+      start_byte: 24
+      end_byte:   28
 match_06:
   pattern_index: 60
   captures:
@@ -50,6 +67,9 @@ match_06:
     index:  10
     string: "type"
 
+    node:
+      start_byte: 34
+      end_byte:   37
 match_07:
   pattern_index: 62
   captures:
@@ -57,6 +77,9 @@ match_07:
     index:  4
     string: "constant"
 
+    node:
+      start_byte: 38
+      end_byte:   39
 match_08:
   pattern_index: 63
   captures:
@@ -64,6 +87,9 @@ match_08:
     index:  11
     string: "variable"
 
+    node:
+      start_byte: 38
+      end_byte:   39
 match_09:
   pattern_index: 34
   captures:
@@ -71,6 +97,9 @@ match_09:
     index:  1
     string: "operator"
 
+    node:
+      start_byte: 40
+      end_byte:   41
 match_10:
   pattern_index: 51
   captures:
@@ -78,6 +107,9 @@ match_10:
     index:  5
     string: "number"
 
+    node:
+      start_byte: 42
+      end_byte:   43
 match_11:
   pattern_index: 47
   captures:
@@ -85,6 +117,9 @@ match_11:
     index:  2
     string: "delimiter"
 
+    node:
+      start_byte: 43
+      end_byte:   44
 match_12:
   pattern_index: 60
   captures:
@@ -92,6 +127,9 @@ match_12:
     index:  10
     string: "type"
 
+    node:
+      start_byte: 46
+      end_byte:   49
 match_13:
   pattern_index: 62
   captures:
@@ -99,6 +137,9 @@ match_13:
     index:  4
     string: "constant"
 
+    node:
+      start_byte: 50
+      end_byte:   51
 match_14:
   pattern_index: 63
   captures:
@@ -106,6 +147,9 @@ match_14:
     index:  11
     string: "variable"
 
+    node:
+      start_byte: 50
+      end_byte:   51
 match_15:
   pattern_index: 34
   captures:
@@ -113,6 +157,9 @@ match_15:
     index:  1
     string: "operator"
 
+    node:
+      start_byte: 52
+      end_byte:   53
 match_16:
   pattern_index: 51
   captures:
@@ -120,6 +167,9 @@ match_16:
     index:  5
     string: "number"
 
+    node:
+      start_byte: 54
+      end_byte:   55
 match_17:
   pattern_index: 47
   captures:
@@ -127,6 +177,9 @@ match_17:
     index:  2
     string: "delimiter"
 
+    node:
+      start_byte: 55
+      end_byte:   56
 match_18:
   pattern_index: 53
   captures:
@@ -134,6 +187,9 @@ match_18:
     index:  6
     string: "function"
 
+    node:
+      start_byte: 58
+      end_byte:   64
 match_19:
   pattern_index: 62
   captures:
@@ -141,6 +197,9 @@ match_19:
     index:  4
     string: "constant"
 
+    node:
+      start_byte: 58
+      end_byte:   64
 match_20:
   pattern_index: 63
   captures:
@@ -148,6 +207,9 @@ match_20:
     index:  11
     string: "variable"
 
+    node:
+      start_byte: 58
+      end_byte:   64
 match_21:
   pattern_index: 48
   captures:
@@ -155,6 +217,9 @@ match_21:
     index:  3
     string: "string"
 
+    node:
+      start_byte: 65
+      end_byte:   71
 match_22:
   pattern_index: 62
   captures:
@@ -162,6 +227,9 @@ match_22:
     index:  4
     string: "constant"
 
+    node:
+      start_byte: 73
+      end_byte:   74
 match_23:
   pattern_index: 63
   captures:
@@ -169,6 +237,9 @@ match_23:
     index:  11
     string: "variable"
 
+    node:
+      start_byte: 73
+      end_byte:   74
 match_24:
   pattern_index: 39
   captures:
@@ -176,6 +247,9 @@ match_24:
     index:  1
     string: "operator"
 
+    node:
+      start_byte: 75
+      end_byte:   76
 match_25:
   pattern_index: 62
   captures:
@@ -183,6 +257,9 @@ match_25:
     index:  4
     string: "constant"
 
+    node:
+      start_byte: 77
+      end_byte:   78
 match_26:
   pattern_index: 63
   captures:
@@ -190,6 +267,9 @@ match_26:
     index:  11
     string: "variable"
 
+    node:
+      start_byte: 77
+      end_byte:   78
 match_27:
   pattern_index: 47
   captures:
@@ -197,3 +277,21 @@ match_27:
     index:  2
     string: "delimiter"
 
+    node:
+      start_byte: 79
+      end_byte:   80
+
+All captures:
+  - keyword
+  - operator
+  - delimiter
+  - string
+  - constant
+  - number
+  - function
+  - function.special
+  - property
+  - label
+  - type
+  - variable
+  - comment
