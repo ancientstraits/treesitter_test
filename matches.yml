@@ -1,297 +1,245 @@
 ---
-captures: 13
+captures: 12
+
 match_00:
   pattern_index: 28
   captures:
     count:  1
     index:  0
     string: "keyword"
-
     node:
+      string:     ("#include")
       start_byte: 0
       end_byte:   8
+
 match_01:
   pattern_index: 49
   captures:
     count:  1
     index:  3
     string: "string"
-
     node:
+      string:     (system_lib_string)
       start_byte: 9
       end_byte:   18
+
 match_02:
   pattern_index: 60
   captures:
     count:  1
     index:  10
     string: "type"
-
     node:
+      string:     (primitive_type)
       start_byte: 20
       end_byte:   23
+
 match_03:
   pattern_index: 55
   captures:
     count:  1
     index:  6
     string: "function"
-
     node:
+      string:     (identifier)
       start_byte: 24
       end_byte:   28
+
 match_04:
   pattern_index: 62
   captures:
     count:  1
     index:  4
     string: "constant"
-
     node:
+      string:     (identifier)
       start_byte: 24
       end_byte:   28
+
 match_05:
-  pattern_index: 63
-  captures:
-    count:  1
-    index:  11
-    string: "variable"
-
-    node:
-      start_byte: 24
-      end_byte:   28
-match_06:
   pattern_index: 60
   captures:
     count:  1
     index:  10
     string: "type"
-
     node:
+      string:     (primitive_type)
       start_byte: 34
       end_byte:   37
-match_07:
+
+match_06:
   pattern_index: 62
   captures:
     count:  1
     index:  4
     string: "constant"
-
     node:
+      string:     (identifier)
       start_byte: 38
       end_byte:   39
-match_08:
-  pattern_index: 63
-  captures:
-    count:  1
-    index:  11
-    string: "variable"
 
-    node:
-      start_byte: 38
-      end_byte:   39
-match_09:
+match_07:
   pattern_index: 34
   captures:
     count:  1
     index:  1
     string: "operator"
-
     node:
+      string:     ("=")
       start_byte: 40
       end_byte:   41
-match_10:
+
+match_08:
   pattern_index: 51
   captures:
     count:  1
     index:  5
     string: "number"
-
     node:
+      string:     (number_literal)
       start_byte: 42
       end_byte:   43
-match_11:
+
+match_09:
   pattern_index: 47
   captures:
     count:  1
     index:  2
     string: "delimiter"
-
     node:
+      string:     (";")
       start_byte: 43
       end_byte:   44
-match_12:
+
+match_10:
   pattern_index: 60
   captures:
     count:  1
     index:  10
     string: "type"
-
     node:
+      string:     (primitive_type)
       start_byte: 46
       end_byte:   49
-match_13:
+
+match_11:
   pattern_index: 62
   captures:
     count:  1
     index:  4
     string: "constant"
-
     node:
+      string:     (identifier)
       start_byte: 50
       end_byte:   51
-match_14:
-  pattern_index: 63
-  captures:
-    count:  1
-    index:  11
-    string: "variable"
 
-    node:
-      start_byte: 50
-      end_byte:   51
-match_15:
+match_12:
   pattern_index: 34
   captures:
     count:  1
     index:  1
     string: "operator"
-
     node:
+      string:     ("=")
       start_byte: 52
       end_byte:   53
-match_16:
+
+match_13:
   pattern_index: 51
   captures:
     count:  1
     index:  5
     string: "number"
-
     node:
+      string:     (number_literal)
       start_byte: 54
       end_byte:   55
-match_17:
+
+match_14:
   pattern_index: 47
   captures:
     count:  1
     index:  2
     string: "delimiter"
-
     node:
+      string:     (";")
       start_byte: 55
       end_byte:   56
-match_18:
+
+match_15:
   pattern_index: 53
   captures:
     count:  1
     index:  6
     string: "function"
-
     node:
+      string:     (identifier)
       start_byte: 58
       end_byte:   64
-match_19:
+
+match_16:
   pattern_index: 62
   captures:
     count:  1
     index:  4
     string: "constant"
-
     node:
+      string:     (identifier)
       start_byte: 58
       end_byte:   64
-match_20:
-  pattern_index: 63
-  captures:
-    count:  1
-    index:  11
-    string: "variable"
 
-    node:
-      start_byte: 58
-      end_byte:   64
-match_21:
+match_17:
   pattern_index: 48
   captures:
     count:  1
     index:  3
     string: "string"
-
     node:
+      string:     (string_literal (escape_sequence))
       start_byte: 65
       end_byte:   71
-match_22:
+
+match_18:
   pattern_index: 62
   captures:
     count:  1
     index:  4
     string: "constant"
-
     node:
+      string:     (identifier)
       start_byte: 73
       end_byte:   74
-match_23:
-  pattern_index: 63
-  captures:
-    count:  1
-    index:  11
-    string: "variable"
 
-    node:
-      start_byte: 73
-      end_byte:   74
-match_24:
+match_19:
   pattern_index: 39
   captures:
     count:  1
     index:  1
     string: "operator"
-
     node:
+      string:     ("+")
       start_byte: 75
       end_byte:   76
-match_25:
+
+match_20:
   pattern_index: 62
   captures:
     count:  1
     index:  4
     string: "constant"
-
     node:
+      string:     (identifier)
       start_byte: 77
       end_byte:   78
-match_26:
-  pattern_index: 63
-  captures:
-    count:  1
-    index:  11
-    string: "variable"
 
-    node:
-      start_byte: 77
-      end_byte:   78
-match_27:
+match_21:
   pattern_index: 47
   captures:
     count:  1
     index:  2
     string: "delimiter"
-
     node:
+      string:     (";")
       start_byte: 79
       end_byte:   80
 
-All captures:
-  - keyword
-  - operator
-  - delimiter
-  - string
-  - constant
-  - number
-  - function
-  - function.special
-  - property
-  - label
-  - type
-  - variable
-  - comment

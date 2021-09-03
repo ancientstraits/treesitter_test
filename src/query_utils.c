@@ -6,8 +6,7 @@
 #include "query_utils.h"
 #include "util.h"
 
-QueryUtils query_utils_create(const char* query_path, TSLanguage* l,
-TSNode root) {
+QueryUtils query_utils_create(const char* query_path, TSLanguage* l, TSNode node) {
     QueryUtils q;
 
     char* query_source = readFile(query_path);
@@ -22,8 +21,7 @@ TSNode root) {
     free(query_source);
 
     q.cursor = ts_query_cursor_new();
-    ts_query_cursor_exec(q.cursor, q.query, root);
-
+    ts_query_cursor_exec(q.cursor, q.query, node);
     return q;
 }
 
@@ -35,21 +33,24 @@ void query_utils_destroy(QueryUtils* q) {
 void query_utils_debug(QueryUtils* q) {
     printf("---\n");
 
-    printf("captures: %d\n",
+    printf("captures: %d\n\n",
         ts_query_capture_count(q->query));
 
     while (ts_query_cursor_next_match(q->cursor, &q->match)) {
         unsigned int length;
+        char* str = ts_node_string(q->match.captures->node);
         printf(
             "match_%02d:\n"
             "  pattern_index: %d\n"
             "  captures:\n"
             "    count:  %d\n"
             "    index:  %d\n"
-            "    string: \"%s\"\n\n"
+            "    string: \"%s\"\n"
             "    node:\n"
+            "      string:     %s\n"
             "      start_byte: %d\n"
             "      end_byte:   %d\n"
+            "\n"
             ,
             q->match.id,
             q->match.pattern_index,
@@ -58,9 +59,19 @@ void query_utils_debug(QueryUtils* q) {
             ts_query_capture_name_for_id(
                 q->query, q->match.captures->index, &length
             ),
+            str,
             ts_node_start_byte(q->match.captures->node),
             ts_node_end_byte(q->match.captures->node)
         );
+        free(str);
+    }
+}
+
+void query_utils_print_captures(QueryUtils* q) {
+    printf("All captures:\n");
+    for (int i = 0; i < ts_query_capture_count(q->query); i++) {
+        unsigned int x;
+        printf("  - %s\n", ts_query_capture_name_for_id(q->query, i, &x));
     }
 }
 
@@ -89,6 +100,15 @@ enum Colors {
     COLOR_PURPLE,
     COLOR_CYAN,
     COLOR_WHITE,
+
+    BCOLOR_BLACK = 130,
+    BCOLOR_RED,
+    BCOLOR_GREEN,
+    BCOLOR_YELLOW,
+    BCOLOR_BLUE,
+    BCOLOR_PURPLE,
+    BCOLOR_CYAN,
+    BCOLOR_WHITE,
 };
 
 unsigned long match_map[] = {
@@ -98,45 +118,42 @@ unsigned long match_map[] = {
     [CAPTURE_STRING] = COLOR_CYAN,
     [CAPTURE_CONSTANT] = COLOR_PURPLE,
     [CAPTURE_NUMBER] = COLOR_GREEN,
-    [CAPTURE_FUNCTION] = COLOR_RED,
-    [CAPTURE_FUNCTION_SPECIAL] = COLOR_YELLOW,
-    [CAPTURE_PROPERTY] = COLOR_BLUE,
-    [CAPTURE_LABEL] = COLOR_CYAN,
-    [CAPTURE_TYPE] = COLOR_PURPLE,
-    [CAPTURE_VARIABLE] = COLOR_GREEN,
-    [CAPTURE_COMMENT] = COLOR_RED,
+    [CAPTURE_FUNCTION] = BCOLOR_RED,
+    [CAPTURE_FUNCTION_SPECIAL] = BCOLOR_YELLOW,
+    [CAPTURE_PROPERTY] = BCOLOR_BLUE,
+    [CAPTURE_LABEL] = BCOLOR_CYAN,
+    [CAPTURE_TYPE] = BCOLOR_PURPLE,
+    [CAPTURE_VARIABLE] = BCOLOR_GREEN,
+    [CAPTURE_COMMENT] = BCOLOR_RED,
 };
 
 #define cprintf(color, format, ...) \
-    printf("\033[0;%lum" format "\033[0m", color, __VA_ARGS__)
+    printf("\033[%lu%sm" format "\033[0m", color % 100, \
+    color / 100 == 1 ? ";1" : "", __VA_ARGS__);
 
-void query_utils_print_captures(QueryUtils* q) {
-    printf("All captures:\n");
-    for (int i = 0; i < ts_query_capture_count(q->query); i++) {
-        unsigned int x;
-        printf("  - %s\n", ts_query_capture_name_for_id(q->query, i, &x));
-    }
-}
 
-static unsigned long* get_range(QueryUtils* q) {
-    return (unsigned long[]) {
+void query_utils_highlight(QueryUtils* q, const char* file_name) {
+    ts_query_cursor_next_match(q->cursor, &q->match);
+    int r[2] = {
         ts_node_start_byte(q->match.captures->node),
         ts_node_end_byte(q->match.captures->node),
     };
-}
-
-void query_utils_highlight(QueryUtils* q, const char* file_name) {
-    if (!ts_query_cursor_next_match(q->cursor, &q->match)) return;
-    unsigned long* range = get_range(q);
-
     char* str = readFile(file_name);
-    printf("range = {%lu, %lu}\n", range[0], range[1]);
-    for (int i = 0; str[i] != '\0'; i++) {
-        if (i >= range[0] && i < range[1]) {
+    for (size_t i = 0; str[i] != '\0'; i++) {
+        if (i > r[1] && ts_query_cursor_next_match(q->cursor, &q->match)) {
+            r[0] = ts_node_start_byte(q->match.captures->node);
+            r[1] = ts_node_end_byte(q->match.captures->node);
+        }
+        if (i >= r[0] && i < r[1]) {
             cprintf(match_map[q->match.captures->index], "%c", str[i]);
+            if (i == r[1] - 1) {
+                if (!ts_query_cursor_next_match(q->cursor, &q->match)) continue;
+                
+                r[0] = ts_node_start_byte(q->match.captures->node);
+                r[1] = ts_node_end_byte(q->match.captures->node);
+            }
             continue;
         }
-        cprintf((unsigned long)COLOR_WHITE, "%c", str[i]);
+        cprintf((size_t)COLOR_WHITE, "%c", str[i]);
     }
-    free(str);
 }

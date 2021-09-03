@@ -11,9 +11,7 @@ typedef struct QueryUtils {
     TSQueryError error_type;
 } QueryUtils;
 
-QueryUtils query_utils_create(const char* query_path,
-                                TSLanguage* l,
-                                TSNode root);
+QueryUtils query_utils_create(const char* query_path, TSLanguage* l, TSNode node);
 void query_utils_destroy(QueryUtils* q);
 void query_utils_debug(QueryUtils* q);
 void query_utils_print_captures(QueryUtils* q);
