@@ -26,8 +26,10 @@ int main(int argc, char* argv[]) {
 	if (strcmp(argv[1], "--debug") == 0) {
 		query_utils_debug(&q);
 		query_utils_print_captures(&q);
+		printf("\n");
 	} else {
 		query_utils_highlight(&q, argv[1]);
+		printf("\n");
 	}
 	query_utils_destroy(&q);
 	parser_utils_destroy(&p);
