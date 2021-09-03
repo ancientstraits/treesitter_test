@@ -20,7 +20,8 @@ int main(int argc, char* argv[]) {
 		return 2;
 	}
 
-	ParserUtils p = parser_utils_create(tree_sitter_c(), argv[1]);
+	ParserUtils p = parser_utils_create(tree_sitter_c(),
+		strcmp(argv[1], "--debug") == 0 ? argv[2] : argv[1]);
 	QueryUtils q  = query_utils_create("queries/highlights.scm", tree_sitter_c(), p.root);
 
 	if (strcmp(argv[1], "--debug") == 0) {

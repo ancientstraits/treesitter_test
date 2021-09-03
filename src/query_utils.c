@@ -39,6 +39,8 @@ void query_utils_debug(QueryUtils* q) {
     while (ts_query_cursor_next_match(q->cursor, &q->match)) {
         unsigned int length;
         char* str = ts_node_string(q->match.captures->node);
+        TSPoint start_point = ts_node_start_point(q->match.captures->node);
+        TSPoint end_point = ts_node_end_point(q->match.captures->node);
         printf(
             "match_%02d:\n"
             "  pattern_index: %d\n"
@@ -50,6 +52,9 @@ void query_utils_debug(QueryUtils* q) {
             "      string:     %s\n"
             "      start_byte: %d\n"
             "      end_byte:   %d\n"
+            "      points:\n"
+            "        start_point: [%d, %d]\n"
+            "        end_point:   [%d, %d]\n"
             "\n"
             ,
             q->match.id,
@@ -61,7 +66,9 @@ void query_utils_debug(QueryUtils* q) {
             ),
             str,
             ts_node_start_byte(q->match.captures->node),
-            ts_node_end_byte(q->match.captures->node)
+            ts_node_end_byte(q->match.captures->node),
+            start_point.row, start_point.column,
+            end_point.row,   end_point.column
         );
         free(str);
     }
@@ -144,7 +151,7 @@ void query_utils_highlight(QueryUtils* q, const char* file_name) {
             r[0] = ts_node_start_byte(q->match.captures->node);
             r[1] = ts_node_end_byte(q->match.captures->node);
         }
-        if (i >= r[0] && i < r[1]) {
+        if (i >= r[0] - 1 && i < r[1]) {
             cprintf(match_map[q->match.captures->index], "%c", str[i]);
             if (i == r[1] - 1) {
                 if (!ts_query_cursor_next_match(q->cursor, &q->match)) continue;

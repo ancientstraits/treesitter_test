@@ -1,7 +1,8 @@
 #include <stdio.h>
 
 int main() {
-	int x = 1;
-	int y = 2;
-	printf("%d\n", x + y);
+	struct.x = 23;
+	ptr->y = 24;
+
+	return 0;
 }
